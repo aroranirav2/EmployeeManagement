@@ -8,6 +8,8 @@ EXPOSE 443
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
 COPY ["EmployeeManagement.API/EmployeeManagement.API.csproj", "EmployeeManagement.API/"]
+COPY ["LoggerService/LoggerService.csproj", "LoggerService/"]
+COPY ["Contracts/Contracts.csproj", "Contracts/"]
 COPY ["Database.EmployeeManagement.Persistence.EFCore/Database.EmployeeManagement.Persistence.EFCore.csproj", "Database.EmployeeManagement.Persistence.EFCore/"]
 COPY ["EmployeeManagement.Repository/EmployeeManagement.Repository.csproj", "EmployeeManagement.Repository/"]
 RUN dotnet restore "EmployeeManagement.API/EmployeeManagement.API.csproj"
