@@ -14,10 +14,13 @@ const string AppSettingsOrigins = "AppSettingsOrigins";
 // Add services to the container.
 builder.Services.AddCors(options =>
 {
+    var defaultCorsConfig = builder.Configuration.GetSection("CorsSettings:AllowedClients").GetChildren().ToArray();
+    var defaultCorsAllowedOrigin = defaultCorsConfig.Select(x => x.Value).ToArray();
+
     options.AddPolicy(name: AppSettingsOrigins,
         policiyBuilder =>
         {
-            policiyBuilder.WithOrigins(builder.Configuration["CorsSettings:AllowedClients"].ToString())
+            policiyBuilder.WithOrigins(defaultCorsAllowedOrigin)
             .AllowCredentials()
             .AllowAnyHeader()
             .AllowAnyMethod();
