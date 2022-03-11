@@ -4,20 +4,27 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { StoreModule } from '@ngrx/store';
-import { DepartmentsListComponent } from './departments/components/departments-list/departments-list.component';
-import { EmployeesListComponent } from './employees/components/employees-list/employees-list.component';
+import { metaReducers, reducers } from './reducers';
+import { DepartmentModule } from './departments/department.module';
+import { EmployeeModule } from './employees/employee.module';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    DepartmentsListComponent,
-    EmployeesListComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    StoreModule.forRoot({}, {})
+    DepartmentModule,
+    EmployeeModule,
+    StoreModule.forRoot(reducers, {
+      metaReducers,
+      runtimeChecks: {
+        strictStateImmutability: true,
+        strictActionImmutability: true
+      }
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]
