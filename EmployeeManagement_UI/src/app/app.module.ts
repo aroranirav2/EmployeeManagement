@@ -5,8 +5,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { StoreModule } from '@ngrx/store';
 import { metaReducers, reducers } from './reducers';
-import { DepartmentModule } from './departments/department.module';
-import { EmployeeModule } from './employees/employee.module';
+import { DepartmentsModule } from './departments/departments.module';
+import { EmployeesModule } from './employees/employees.module';
 
 @NgModule({
   declarations: [
@@ -16,8 +16,8 @@ import { EmployeeModule } from './employees/employee.module';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    DepartmentModule,
-    EmployeeModule,
+    DepartmentsModule,
+    EmployeesModule,
     StoreModule.forRoot(reducers, {
       metaReducers,
       runtimeChecks: {

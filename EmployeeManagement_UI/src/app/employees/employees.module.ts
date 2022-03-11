@@ -15,4 +15,4 @@ import { EmployeesListComponent } from './components/employees-list/employees-li
     EmployeesListComponent
   ]
 })
-export class EmployeeModule { }
+export class EmployeesModule { }
