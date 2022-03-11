@@ -1,36 +1,35 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http'
-import { catchError, map, Observable, throwError } from 'rxjs';
-import { DepartmentDto } from 'src/app/Dtos/department-dto';
-import { CommonService } from './common.service';
-import { environment } from 'src/environments/environment';
+import { Observable, map, catchError, throwError } from 'rxjs';
+import { CommonService } from 'src/app/shared/services/common.service';
 import { ApiPaths } from 'src/enums/api-paths-enum';
+import { environment } from 'src/environments/environment';
+import { IDepartment } from '../models/IDepartment';
 
 @Injectable({
   providedIn: 'root'
 })
-export class DepartmentService {
-
+export class DepartmentsService {
   readonly baseUrl = environment.employeeManagementBaseUrl;
 
   constructor(private httpClient: HttpClient, private commonService: CommonService) { }
 
-  getAllDepartmentsWithoutEmployees(): Observable<DepartmentDto[]> {
+  getAllDepartmentsWithoutEmployees(): Observable<IDepartment[]> {
     const headers = this.commonService.setDefaultHeader();
     const query = `${this.baseUrl}${ApiPaths.GetAllDepartmentsWithoutEmployees}`;
-    return this.httpClient.get<DepartmentDto[]>(query, { headers })
+    return this.httpClient.get<IDepartment[]>(query, { headers })
       .pipe(
-        map((departments: DepartmentDto[]) => departments),
+        map((departments: IDepartment[]) => departments),
         catchError(error => throwError(() => error))
       );
   }
 
-  getAllDepartmentsWithEmployees(): Observable<DepartmentDto[]> {
+  getAllDepartmentsWithEmployees(): Observable<IDepartment[]> {
     const headers = this.commonService.setDefaultHeader();
     const query = `${this.baseUrl}${ApiPaths.GetAllDepartmentsWithEmployees}`;
-    return this.httpClient.get<DepartmentDto[]>(query, {headers})
+    return this.httpClient.get<IDepartment[]>(query, {headers})
       .pipe(
-        map((departments: DepartmentDto[]) => departments),
+        map((departments: IDepartment[]) => departments),
         catchError(error => throwError(() => error))
       );
   }
