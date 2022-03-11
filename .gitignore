@@ -361,3 +361,10 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+EmployeeManagement_API/internal_logs/internallog.txt
+EmployeeManagement_API/.env
+EmployeeManagement_API/ASP.NET/
+EmployeeManagement_API/Microsoft/UserSecrets/05ab99fd-98fa-4a78-930d-bfb259aa0330/secret.json
+EmployeeManagement_API/Microsoft/UserSecrets/05ab99fd-98fa-4a78-930d-bfb259aa0330/.DS_Store
+EmployeeManagement_API/Microsoft/UserSecrets/.DS_Store
+EmployeeManagement_API/Microsoft/.DS_Store
