@@ -1,0 +1,5 @@
+<p>departments-list works!</p>
+<div *ngFor="let department of departments$ | async">
+    <p>{{department.departmentName}}</p>
+    <p>{{department.departmentId}}</p>
+</div>
