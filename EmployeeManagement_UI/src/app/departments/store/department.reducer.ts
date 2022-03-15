@@ -6,10 +6,13 @@ import * as DepartmentActions from './department.actions';
 export const departmentsFeatureKey = 'departments';
 
 export interface DepartmentState extends EntityState<Department> {
-  error: any
+  error: any;
 }
 
-export const adapter: EntityAdapter<Department> = createEntityAdapter<Department>();
+export const adapter: EntityAdapter<Department> = createEntityAdapter<Department>({
+  sortComparer: false,
+  selectId: (department: Department) => department.departmentId.toString()
+});
 
 export const initialState: DepartmentState = adapter.getInitialState({
   error: undefined

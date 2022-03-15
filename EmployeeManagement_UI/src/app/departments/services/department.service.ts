@@ -10,13 +10,12 @@ import { Department } from '../models/department.model';
   providedIn: 'root'
 })
 export class DepartmentService {
-  readonly baseUrl = environment.employeeManagementBaseUrl;
 
   constructor(private httpClient: HttpClient, private commonService: CommonService) { }
 
   getAllDepartmentsWithoutEmployees(): Observable<Department[]> {
     const headers = this.commonService.setDefaultHeader();
-    const query = `${this.baseUrl}${ApiPaths.GetAllDepartmentsWithoutEmployees}`;
+    const query = `${this.commonService.baseUrl}${ApiPaths.GetAllDepartmentsWithoutEmployees}`;
     return this.httpClient.get<Department[]>(query, { headers })
       .pipe(
         map((departments: Department[]) => departments),
@@ -26,7 +25,7 @@ export class DepartmentService {
 
   getAllDepartmentsWithEmployees(): Observable<Department[]> {
     const headers = this.commonService.setDefaultHeader();
-    const query = `${this.baseUrl}${ApiPaths.GetAllDepartmentsWithEmployees}`;
+    const query = `${this.commonService.baseUrl}${ApiPaths.GetAllDepartmentsWithEmployees}`;
     return this.httpClient.get<Department[]>(query, { headers })
       .pipe(
         map((departments: Department[]) => departments),
@@ -36,7 +35,7 @@ export class DepartmentService {
 
   postDepartment(department: Department): Observable<Department> {
     const headers = this.commonService.setDefaultHeader();
-    const query = `${this.baseUrl}${ApiPaths.PostDepartment}`;
+    const query = `${this.commonService.baseUrl}${ApiPaths.PostDepartment}`;
     return this.httpClient.post<Department>(query, department, { headers });
   }
 }
