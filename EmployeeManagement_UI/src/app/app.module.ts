@@ -11,6 +11,7 @@ import { environment } from '../environments/environment';
 import { EffectsModule } from '@ngrx/effects';
 import { AppEffects } from './app.effects';
 import { metaReducers } from './reducers';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -30,10 +31,11 @@ import { metaReducers } from './reducers';
       }
     }),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
-    EffectsModule.forRoot([AppEffects])
+    EffectsModule.forRoot([AppEffects]),
+    BrowserAnimationsModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule { }
 function reducers(reducers: any, arg1: { metaReducers: any; runtimeChecks: { strictStateImmutability: true; strictActionImmutability: true; }; }): any[] | import("@angular/core").Type<any> | import("@angular/core").ModuleWithProviders<{}> {
