@@ -6,8 +6,7 @@ import { StoreModule } from '@ngrx/store';
 import * as fromDepartment from './store/department.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { DepartmentEffects } from './store/department.effects';
-
-
+import { MatTableModule } from '@angular/material/table';
 
 @NgModule({
   declarations: [
@@ -15,8 +14,9 @@ import { DepartmentEffects } from './store/department.effects';
   ],
   imports: [
     CommonModule,
+    MatTableModule,
     StoreModule.forFeature(
-      fromDepartment.departmentsFeatureKey, 
+      fromDepartment.departmentsFeatureKey,
       fromDepartment.reducer
     ),
     EffectsModule.forFeature([DepartmentEffects]),
