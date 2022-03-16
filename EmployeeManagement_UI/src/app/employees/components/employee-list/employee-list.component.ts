@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { select, Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { Observable, Subject, takeUntil } from 'rxjs';
 import { Employee } from '../../models/employee.model';
 import { EmployeeState } from '../../store/employee.reducer';
 import * as fromEmployeeAction from '../../store/employee.actions';
@@ -11,10 +11,9 @@ import * as employeeSelector from '../../store/employee.selectors';
   templateUrl: './employee-list.component.html',
   styleUrls: ['./employee-list.component.scss']
 })
-export class EmployeeListComponent implements OnInit {
-
+export class EmployeeListComponent implements OnInit, OnDestroy {
   employees$: Observable<Employee[]>;
-  employees: Employee[];
+  private employeesSubject = new Subject();
 
   constructor(private store: Store<EmployeeState>) { }
 
@@ -23,7 +22,11 @@ export class EmployeeListComponent implements OnInit {
     this.loadEmployees();
   }
 
+  ngOnDestroy(): void {
+      this.employeesSubject.next(true);
+      this.employeesSubject.complete();
+  }
   loadEmployees(): void {
-    this.employees$ = this.store.pipe(select(employeeSelector.selectEmployees));
+    this.employees$ = this.store.pipe(takeUntil(this.employeesSubject), select(employeeSelector.selectEmployees));
   }
 }
