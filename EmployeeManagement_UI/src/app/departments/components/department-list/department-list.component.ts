@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { select, Store } from '@ngrx/store';
-import { Observable, Subject, takeUntil } from 'rxjs';
+import { Observable, Subject, Subscriber, Subscription, takeUntil } from 'rxjs';
 import { Department } from '../../models/department.model';
 import { DepartmentState } from '../../store/department.reducer';
 import * as fromDepartmentAction from '../../store/department.actions';
@@ -13,7 +13,6 @@ import * as departmentSelector from '../../store/department.selectors';
 })
 export class DepartmentListComponent implements OnInit, OnDestroy {
   departments$: Observable<Department[]>;
-  subscriptions: any[] = [];
   displayedColumns: string[] = ['Department Name'];
   private departmentsSubject = new Subject();
 
@@ -22,11 +21,9 @@ export class DepartmentListComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.store.dispatch(fromDepartmentAction.loadDepartments());
     this.loadDepartments();
-    this.subscriptions.push(this.departments$);
   }
 
   ngOnDestroy(): void {
-    this.subscriptions.forEach(s => s.unsubscribe());
     this.departmentsSubject.next(true);
     this.departmentsSubject.complete();
   }
