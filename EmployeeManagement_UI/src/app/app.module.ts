@@ -12,13 +12,17 @@ import { EffectsModule } from '@ngrx/effects';
 import { AppEffects } from './app.effects';
 import { metaReducers } from './reducers';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NavBarComponent } from './shared/services/components/nav-bar/nav-bar.component';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    NavBarComponent
   ],
   imports: [
     BrowserModule,
+    SharedModule,
     AppRoutingModule,
     HttpClientModule,
     DepartmentModule,
