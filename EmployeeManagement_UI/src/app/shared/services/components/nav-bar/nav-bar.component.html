@@ -1,7 +1,13 @@
-<!-- <nav aria-label="Top Toolbar" class="docs-navbar-header">
-    <p>something</p>
-</nav> -->
-
 <mat-toolbar color="primary">
-    <span>Employee Manager</span>
+    <mat-toolbar-row>
+        <button mat-icon-button>
+            <!-- <mat-icon (click)="sidenav.toggle()">menu</mat-icon> -->
+        </button>
+        <h1>Employee Manager</h1>
+        <span class="menu-spacer"></span>
+        <div>
+            <a mat-flat-button color="primary" class="docs-navbar-header-item-selected" [routerLink]="'/departments'">Departments</a>
+            <a mat-flat-button color="primary" class="docs-navbar-header-item-selected" [routerLink]="'/employees'"> Employees </a>
+        </div>
+    </mat-toolbar-row>
 </mat-toolbar>
