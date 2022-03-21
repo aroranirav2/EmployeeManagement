@@ -5,5 +5,6 @@ export interface Employee{
     employeeId: Guid;
     firstName: string;
     lastName: string;
+    gender: string;
     department: Department;
 }

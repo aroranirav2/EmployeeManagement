@@ -13,6 +13,7 @@ import * as employeeSelector from '../../store/employee.selectors';
 })
 export class EmployeeListComponent implements OnInit, OnDestroy {
   employees$: Observable<Employee[]>;
+  displayedColumns: string[] = ['Full Name', 'Gender'];
   private employeesSubject = new Subject();
 
   constructor(private store: Store<EmployeeState>) { }
@@ -23,10 +24,19 @@ export class EmployeeListComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-      this.employeesSubject.next(true);
-      this.employeesSubject.complete();
+    this.employeesSubject.next(true);
+    this.employeesSubject.complete();
   }
   loadEmployees(): void {
     this.employees$ = this.store.pipe(takeUntil(this.employeesSubject), select(employeeSelector.selectEmployees));
+  }
+  displayGender(gender: string): string {
+    if (gender.toUpperCase() === 'M') {
+      return 'Male';
+    }
+    if (gender.toUpperCase() === 'F') {
+      return 'Female';
+    }
+    return 'Other';
   }
 }
