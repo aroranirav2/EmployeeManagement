@@ -1,31 +1,28 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatTableModule } from '@angular/material/table';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatIconModule } from '@angular/material/icon';
-import { MatListModule } from '@angular/material/list';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatButtonModule } from '@angular/material/button';
-
+import { AppRoutingModule } from '../app-routing.module';
+import { LayoutModule } from '@angular/cdk/layout';
+import { HeaderComponent } from './components/header/header.component';
+import { MaterialModule } from './material.module';
+import { SideNavBarComponent } from './components/side-nav-bar/side-nav-bar.component';
+import { LoaderOverlayComponent } from './components/loader-overlay/loader-overlay.component';
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    HeaderComponent,
+    SideNavBarComponent,
+    LoaderOverlayComponent
+  ],
   imports: [
-    MatTableModule,
-    MatToolbarModule,
-    MatIconModule,
-    MatSidenavModule,
-    MatListModule,
-    MatButtonModule,
-    CommonModule
+    AppRoutingModule,
+    CommonModule,
+    LayoutModule,
+    MaterialModule
   ],
   exports: [
-    MatTableModule,
-    MatToolbarModule,
-    MatIconModule,
-    MatSidenavModule,
-    MatButtonModule,
-    MatListModule
+    HeaderComponent,
+    SideNavBarComponent,
+    LoaderOverlayComponent
   ]
 })
 export class SharedModule { }
