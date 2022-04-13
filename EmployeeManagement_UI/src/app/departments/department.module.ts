@@ -7,6 +7,7 @@ import * as fromDepartment from './store/department.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { DepartmentEffects } from './store/department.effects';
 import { SharedModule } from '../shared/shared.module';
+import { MaterialModule } from '../shared/material.module';
 
 @NgModule({
   declarations: [
@@ -14,6 +15,7 @@ import { SharedModule } from '../shared/shared.module';
   ],
   imports: [
     CommonModule,
+    MaterialModule,
     SharedModule,
     StoreModule.forFeature(
       fromDepartment.departmentsFeatureKey,

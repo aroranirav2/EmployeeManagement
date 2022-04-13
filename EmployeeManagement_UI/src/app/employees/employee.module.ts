@@ -6,6 +6,7 @@ import * as fromEmployee from './store/employee.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { EmployeeEffects } from './store/employee.effects';
 import { SharedModule } from '../shared/shared.module';
+import { MaterialModule } from '../shared/material.module';
 
 
 
@@ -16,6 +17,7 @@ import { SharedModule } from '../shared/shared.module';
   imports: [
     CommonModule,
     SharedModule,
+    MaterialModule,
     StoreModule.forFeature(fromEmployee.employeesFeatureKey, fromEmployee.reducer),
     EffectsModule.forFeature([EmployeeEffects])
   ],
