@@ -5,13 +5,13 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { HeaderComponent } from './components/header/header.component';
 import { MaterialModule } from './material.module';
 import { SideNavBarComponent } from './components/side-nav-bar/side-nav-bar.component';
-import { LoaderOverlayComponent } from './components/loader-overlay/loader-overlay.component';
+import { LoaderComponent } from './components/loader/loader.component';
 
 @NgModule({
   declarations: [
     HeaderComponent,
     SideNavBarComponent,
-    LoaderOverlayComponent
+    LoaderComponent
   ],
   imports: [
     AppRoutingModule,
@@ -22,7 +22,7 @@ import { LoaderOverlayComponent } from './components/loader-overlay/loader-overl
   exports: [
     HeaderComponent,
     SideNavBarComponent,
-    LoaderOverlayComponent
+    LoaderComponent
   ]
 })
 export class SharedModule { }
