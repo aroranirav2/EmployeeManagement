@@ -17,8 +17,7 @@ export class DepartmentService {
     const query = `${this.commonService.baseUrl}${ApiPaths.GetAllDepartmentsWithoutEmployees}`;
     return this.httpClient.get<Department[]>(query, { headers })
       .pipe(
-        map((departments: Department[]) => departments),
-        catchError(error => throwError(() => error))
+        map((departments: Department[]) => departments)
       );
   }
 
@@ -27,8 +26,7 @@ export class DepartmentService {
     const query = `${this.commonService.baseUrl}${ApiPaths.GetAllDepartmentsWithEmployees}`;
     return this.httpClient.get<Department[]>(query, { headers })
       .pipe(
-        map((departments: Department[]) => departments),
-        catchError(error => throwError(() => error))
+        map((departments: Department[]) => departments)
       );
   }
 
