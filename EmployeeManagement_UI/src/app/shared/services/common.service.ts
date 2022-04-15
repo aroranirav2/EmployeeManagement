@@ -13,7 +13,8 @@ export class CommonService {
   setJsonHeader(): HttpHeaders {
     return new HttpHeaders({
       'Accept': 'application/json',
-      'Content-type': 'application/json'
+      'Content-type': 'application/json',
+      'Access-Control-Allow-Headers': 'Content-Type',
     });
   }
 }
