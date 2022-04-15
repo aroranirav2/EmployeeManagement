@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, map, catchError, throwError } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { CommonService } from 'src/app/shared/services/common.service';
 import { ApiPaths } from 'src/enums/api-paths-enum';
 import { Department } from '../models/department.model';
