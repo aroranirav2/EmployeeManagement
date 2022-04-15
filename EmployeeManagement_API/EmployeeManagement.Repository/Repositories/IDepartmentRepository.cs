@@ -8,6 +8,6 @@ namespace EmployeeManagement.Repository.Repositories
         IEnumerable<Department> GetAllDepartmentsWithEmployees();
         Task<Department?> GetDepartmentByIdAsync(Guid departmentId);
         Task AddNewDepartmentAsync(Department department);
-        Task<Guid?> GetDepartmentIdByDepartmentName(string departmentName);
+        Task<Department?> GetDepartmentByNameAsync(string departmentName);
     }
 }

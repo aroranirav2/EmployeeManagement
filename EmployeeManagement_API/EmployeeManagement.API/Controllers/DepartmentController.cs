@@ -48,7 +48,7 @@ namespace EmployeeManagement.API.Controllers
         public async Task<ActionResult<DepartmentDto>> GetDepartmentById(Guid id)
         {
             var department = await _departmentRepository.GetDepartmentByIdAsync(id);
-            if(department == null)
+            if (department == null)
             {
                 await _loggerManager.LogWarnAsync($"No department found with department id = {id}");
                 return NotFound();
@@ -56,16 +56,23 @@ namespace EmployeeManagement.API.Controllers
             var departmentDto = _mapper.Map<DepartmentDto>(department);
             return Ok(departmentDto);
         }
+        [HttpGet("{name}", Name = "departmentName")]
+        public async Task<ActionResult<DepartmentDto>> GetDepartmentByName(string name)
+        {
+            var department = await _departmentRepository.GetDepartmentByNameAsync(name);
+            var departmentDto = _mapper.Map<DepartmentDto>(department);
+            return Ok(departmentDto);
+        }
         [HttpPost]
-        public async Task<IActionResult> PostDepartment([FromBody]DepartmentPostDto departmentPostDto)
+        public async Task<IActionResult> PostDepartment([FromBody] DepartmentPostDto departmentPostDto)
         {
             if (departmentPostDto == null)
                 return BadRequest("department is null");
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
                 return BadRequest(ModelState);
             var department = _mapper.Map<Department>(departmentPostDto);
             await _departmentRepository.AddNewDepartmentAsync(department);
-            return Ok($"{departmentPostDto.DepartmentName} created successfully.");
+            return CreatedAtAction(nameof(GetDepartmentByName), new { name = departmentPostDto.DepartmentName }, department);
         }
 
     }

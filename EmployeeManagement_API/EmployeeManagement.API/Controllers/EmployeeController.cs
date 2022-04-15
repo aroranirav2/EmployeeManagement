@@ -27,7 +27,7 @@ namespace EmployeeManagement.API.Controllers
         public async Task<ActionResult<List<EmployeeDto>>> GetAllEmployees()
         {
             var employees = _employeeRepository.GetAllEmployees();
-            if(!employees.Any())
+            if (!employees.Any())
             {
                 await _loggerManager.LogWarnAsync($"No employees found");
                 return NotFound();
@@ -39,7 +39,7 @@ namespace EmployeeManagement.API.Controllers
         public async Task<ActionResult<List<EmployeeDto>>> GetEmployeesByDepartmentId(Guid departmentId)
         {
             var employees = _employeeRepository.GetEmployeesByDepartmentId(departmentId);
-            if(!employees.Any())
+            if (!employees.Any())
             {
                 await _loggerManager.LogWarnAsync($"No employees found for deparment id {departmentId}");
                 return NotFound();
@@ -55,11 +55,11 @@ namespace EmployeeManagement.API.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var departmentId = await _departmentRepository.GetDepartmentIdByDepartmentName(employeeDto.DepartmentName);
-            if (departmentId == null)
+            var department = await _departmentRepository.GetDepartmentByNameAsync(employeeDto.DepartmentName).ConfigureAwait(false);
+            if (department == null)
                 return BadRequest("Invalid department name");
             var employee = _mapper.Map<Employee>(employeeDto);
-            employee.DepartmentId = departmentId ?? throw new Exception("deparment id is null");
+            employee.DepartmentId = department != null ? department.DepartmentId : throw new Exception("deparment id is null");
             await _employeeRepository.AddNewEmployeeAsync(employee);
             return Ok();
         }

@@ -10,10 +10,11 @@ export class CommonService {
 
   constructor() { }
 
-  setDefaultHeader(): HttpHeaders {
+  setJsonHeader(): HttpHeaders {
     return new HttpHeaders({
       'Accept': 'application/json',
-      'Content-type': 'application/json'
+      'Content-type': 'application/json',
+      'Access-Control-Allow-Headers': 'Content-Type',
     });
   }
 }

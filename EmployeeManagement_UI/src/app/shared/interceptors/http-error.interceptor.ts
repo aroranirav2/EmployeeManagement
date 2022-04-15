@@ -1,12 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor, HttpErrorResponse } from '@angular/common/http';
 import { catchError, Observable, retry, throwError } from 'rxjs';
-import { NotificationService } from '../services/notification.service';
 
 @Injectable()
 export class HttpErrorInterceptor implements HttpInterceptor {
 
-  constructor(private notificationService: NotificationService) { }
+  constructor() { }
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     return next.handle(request)
@@ -22,7 +21,6 @@ export class HttpErrorInterceptor implements HttpInterceptor {
             //server side errors
             errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
           }
-          this.notificationService.showError(errorMessage);
           console.log(errorMessage);
           return throwError(() => errorMessage);
         })
