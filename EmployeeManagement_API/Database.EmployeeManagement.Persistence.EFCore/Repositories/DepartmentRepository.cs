@@ -25,13 +25,10 @@ namespace Database.EmployeeManagement.Persistence.EFCore.Repositories
             await _employeeSystemDbContext.SaveChangesAsync().ConfigureAwait(false);
         }
 
-        public async Task<Guid?> GetDepartmentIdByDepartmentName(string departmentName)
-        {
-            var department = await _employeeSystemDbContext.Department
+        public async Task<Department?> GetDepartmentByNameAsync(string departmentName) =>
+            await _employeeSystemDbContext.Department
                 .Where(x => x.DepartmentName == departmentName)
                 .FirstOrDefaultAsync()
                 .ConfigureAwait(false);
-            return department?.DepartmentId;
-        }
     }
 }

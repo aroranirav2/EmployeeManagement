@@ -13,9 +13,9 @@ export class EmployeeService {
   constructor(private httpClient: HttpClient, private commonService: CommonService) { }
 
   getAllEmployees(): Observable<Employee[]> {
-    const headers = this.commonService.setDefaultHeader();
+    const headers = this.commonService.setJsonHeader();
     const query = `${this.commonService.baseUrl}${ApiPaths.GetAllEmployees}`
-    return this.httpClient.get<Employee[]>(query, { headers }).pipe(
+    return this.httpClient.get<Employee[]>(query, { headers: headers }).pipe(
       map((employees: Employee[]) => employees)
     );
   }
