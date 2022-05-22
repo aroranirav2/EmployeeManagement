@@ -21,13 +21,14 @@ namespace Database.EmployeeManagement.Persistence.EFCore.Repositories
 
         public async Task AddNewDepartmentAsync(Department department)
         {
-            await _employeeSystemDbContext.Department.AddAsync(department).ConfigureAwait(false);
+            _employeeSystemDbContext.Department.Add(department);
             await _employeeSystemDbContext.SaveChangesAsync().ConfigureAwait(false);
         }
 
         public async Task<Department?> GetDepartmentByNameAsync(string departmentName) =>
             await _employeeSystemDbContext.Department
                 .Where(x => x.DepartmentName == departmentName)
+                .AsNoTracking()
                 .FirstOrDefaultAsync()
                 .ConfigureAwait(false);
     }

@@ -15,7 +15,7 @@ namespace Database.EmployeeManagement.Persistence.EFCore.Repositories
 
         public async Task AddNewEmployeeAsync(Employee employee)
         {
-            await _employeeSystemDbContext.AddAsync(employee).ConfigureAwait(false);
+            _employeeSystemDbContext.Add(employee);
             await _employeeSystemDbContext.SaveChangesAsync().ConfigureAwait(false);
         }
 
