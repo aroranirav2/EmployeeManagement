@@ -17,7 +17,11 @@ namespace Database.EmployeeManagement.Persistence.EFCore.Repositories
             _employeeSystemDbContext.Department.Include(x => x.Employees).AsNoTracking();
 
         public async Task<Department?> GetDepartmentByIdAsync(Guid departmentId) =>
-             await _employeeSystemDbContext.Department.FindAsync(departmentId).ConfigureAwait(false);
+             await _employeeSystemDbContext.Department
+                .Where(d => d.DepartmentId == departmentId)
+                .AsNoTracking()
+                .FirstOrDefaultAsync()
+                .ConfigureAwait(false);
 
         public async Task AddNewDepartmentAsync(Department department)
         {
@@ -31,5 +35,11 @@ namespace Database.EmployeeManagement.Persistence.EFCore.Repositories
                 .AsNoTracking()
                 .FirstOrDefaultAsync()
                 .ConfigureAwait(false);
+
+        public async Task UpdateDepartment(Department department)
+        {
+            _employeeSystemDbContext.Department.Update(department);
+            await _employeeSystemDbContext.SaveChangesAsync().ConfigureAwait(false);
+        }
     }
 }
