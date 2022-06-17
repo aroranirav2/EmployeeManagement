@@ -25,12 +25,19 @@ namespace Database.EmployeeManagement.Persistence.EFCore.Repositories
             .Include(e => e.Phones)
             .Include(e => e.Addresses)
             .AsNoTracking();
-
         public IEnumerable<Employee> GetEmployeesByDepartmentId(Guid departmentId) =>
             _employeeSystemDbContext.Department
             .Where(x => x.DepartmentId == departmentId)
             .Include(x => x.Employees)
-            .SelectMany(x => x.Employees)
-            .AsNoTracking();
+            .AsNoTracking()
+            .SelectMany(x => x.Employees);
+
+        public async Task<Employee?> GetEmployeeByEmployeeId(Guid employeeId) =>
+            await _employeeSystemDbContext.Employee.Where(e => e.EmployeeId == employeeId)
+            .Include(x => x.Department)
+            .Include(x => x.Addresses)
+            .Include(x => x.Phones)
+            .AsNoTracking()
+            .FirstOrDefaultAsync();
     }
 }

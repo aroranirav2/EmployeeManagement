@@ -7,5 +7,6 @@ namespace EmployeeManagement.Repository.Repositories
         IEnumerable<Employee> GetAllEmployees();
         IEnumerable<Employee> GetEmployeesByDepartmentId(Guid departmentId);
         Task AddNewEmployeeAsync(Employee employee);
+        Task<Employee?> GetEmployeeByEmployeeId(Guid employeeId);
     }
 }

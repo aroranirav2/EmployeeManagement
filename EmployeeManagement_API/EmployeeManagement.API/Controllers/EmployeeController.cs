@@ -47,6 +47,18 @@ namespace EmployeeManagement.API.Controllers
             var employeeDtos = _mapper.Map<List<EmployeeDto>>(employees);
             return Ok(employeeDtos);
         }
+        [HttpGet("{employeeId:guid}")]
+        public async Task<ActionResult<EmployeeDto>> GetEmployeeByEmployeeId(Guid employeeId)
+        {
+            var employee = _employeeRepository.GetEmployeeByEmployeeId(employeeId);
+            if (employee == null)
+            {
+                await _loggerManager.LogWarnAsync($"No employee found for employee id {employeeId}");
+                return NotFound();
+            }
+            var employeeDto = _mapper.Map<EmployeeDto>(employee);
+            return Ok(employeeDto);
+        }
         [HttpPost]
         public async Task<IActionResult> PostEmployee([FromBody] EmployeePostDto employeeDto)
         {
@@ -61,7 +73,7 @@ namespace EmployeeManagement.API.Controllers
             var employee = _mapper.Map<Employee>(employeeDto);
             employee.DepartmentId = department != null ? department.DepartmentId : throw new Exception("deparment id is null");
             await _employeeRepository.AddNewEmployeeAsync(employee);
-            return Ok();
+            return CreatedAtAction(nameof(GetEmployeeByEmployeeId), new { employeeId = employee.EmployeeId }, employee);
         }
     }
 }

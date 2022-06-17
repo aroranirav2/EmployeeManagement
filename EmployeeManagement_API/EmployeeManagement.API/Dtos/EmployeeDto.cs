@@ -7,5 +7,6 @@
         public string LastName { get; set; }
         public string Gender { get; set; }
         public DepartmentForEmployeeDto Department { get; set; }
+        public IEnumerable<PhoneDto> Phones { get; set; }
     }
 }
