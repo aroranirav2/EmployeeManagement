@@ -63,6 +63,20 @@ namespace EmployeeManagement.API.Controllers
             var departmentDto = _mapper.Map<DepartmentDto>(department);
             return Ok(departmentDto);
         }
+        [HttpPut("{id:guid}")]
+        public async Task<ActionResult> UpdateDepartment(Guid id, [FromBody] DepartmentPostDto departmentPostDto)
+        {
+            var existingDepartment = await _departmentRepository.GetDepartmentByIdAsync(id).ConfigureAwait(false);
+            if (existingDepartment == null)
+            {
+                await _loggerManager.LogWarnAsync($"No department found with department id = {id}");
+                return NotFound($"Department with {id} doesn't exist.");
+            }
+            var department = _mapper.Map<Department>(departmentPostDto);
+            department.DepartmentId = id;
+            await _departmentRepository.UpdateDepartment(department);
+            return NoContent();
+        }
         [HttpPost]
         public async Task<IActionResult> PostDepartment([FromBody] DepartmentPostDto departmentPostDto)
         {
