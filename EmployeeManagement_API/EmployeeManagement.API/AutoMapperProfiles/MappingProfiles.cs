@@ -18,6 +18,9 @@ namespace EmployeeManagement.API.AutoMapperProfiles
             CreateMap<Employee, EmployeeForDepartmentDto>();
             CreateMap<EmployeePostDto, Employee>();
             #endregion
+            #region Phone
+            CreateMap<Phone, PhoneDto>();
+            #endregion
         }
     }
 }
