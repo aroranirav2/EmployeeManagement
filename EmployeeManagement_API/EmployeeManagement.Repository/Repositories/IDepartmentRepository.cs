@@ -9,6 +9,6 @@ namespace EmployeeManagement.Repository.Repositories
         Task<Department?> GetDepartmentByIdAsync(Guid departmentId);
         Task AddNewDepartmentAsync(Department department);
         Task<Department?> GetDepartmentByNameAsync(string departmentName);
-        Task UpdateDepartment(Department department);
+        Task UpdateDepartmentAsync(Department department);
     }
 }

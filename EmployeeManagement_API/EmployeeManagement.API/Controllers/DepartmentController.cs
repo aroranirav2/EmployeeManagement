@@ -74,7 +74,7 @@ namespace EmployeeManagement.API.Controllers
             }
             var department = _mapper.Map<Department>(departmentPostDto);
             department.DepartmentId = id;
-            await _departmentRepository.UpdateDepartment(department);
+            await _departmentRepository.UpdateDepartmentAsync(department);
             return NoContent();
         }
         [HttpPost]
@@ -88,6 +88,5 @@ namespace EmployeeManagement.API.Controllers
             await _departmentRepository.AddNewDepartmentAsync(department);
             return CreatedAtAction(nameof(GetDepartmentByName), new { name = departmentPostDto.DepartmentName }, department);
         }
-
     }
 }

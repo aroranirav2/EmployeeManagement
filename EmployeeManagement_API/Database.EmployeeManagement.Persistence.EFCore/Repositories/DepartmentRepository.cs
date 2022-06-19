@@ -36,7 +36,7 @@ namespace Database.EmployeeManagement.Persistence.EFCore.Repositories
                 .FirstOrDefaultAsync()
                 .ConfigureAwait(false);
 
-        public async Task UpdateDepartment(Department department)
+        public async Task UpdateDepartmentAsync(Department department)
         {
             _employeeSystemDbContext.Department.Update(department);
             await _employeeSystemDbContext.SaveChangesAsync().ConfigureAwait(false);
