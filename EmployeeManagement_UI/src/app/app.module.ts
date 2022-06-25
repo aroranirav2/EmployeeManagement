@@ -16,6 +16,7 @@ import { SharedModule } from './shared/shared.module';
 import { MaterialModule } from './shared/material.module';
 import { LoaderInterceptor } from './shared/interceptors/loader.interceptor';
 import { HttpErrorInterceptor } from './shared/interceptors/http-error.interceptor';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { HttpErrorInterceptor } from './shared/interceptors/http-error.intercept
     HttpClientModule,
     DepartmentModule,
     EmployeeModule,
+    ReactiveFormsModule,
     StoreModule.forRoot(reducers, {
       metaReducers,
       runtimeChecks: {
