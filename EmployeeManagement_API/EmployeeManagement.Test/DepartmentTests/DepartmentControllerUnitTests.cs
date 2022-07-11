@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using Moq;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -36,9 +37,9 @@ namespace EmployeeManagement.Test.DepartmentTests
         public async Task Get_All_Departments_Without_Employees_Returns_Correct_Values()
         {
             mockDepartmentRepo.Setup(repo => repo.GetAllDepartmentsWithoutEmployees())
-                .Returns(GetTestAllDepartments());
+                .Returns(TestDepartments);
 
-            var actionResult = await departmentController.GetAllDepartmentsWithoutEmployees();
+            var actionResult = await departmentController.GetAllDepartmentsWithoutEmployees().ConfigureAwait(false);
             var okObjectResult = actionResult.Result as OkObjectResult;
             Assert.NotNull(okObjectResult);
 
@@ -53,7 +54,7 @@ namespace EmployeeManagement.Test.DepartmentTests
             mockDepartmentRepo.Setup(repo => repo.GetAllDepartmentsWithoutEmployees())
                 .Returns(new List<Department>());
 
-            var result = await departmentController.GetAllDepartmentsWithoutEmployees();
+            var result = await departmentController.GetAllDepartmentsWithoutEmployees().ConfigureAwait(false);
             Assert.IsType<NotFoundResult>(result.Result);
             Assert.Null(result.Value);
         }
@@ -63,7 +64,7 @@ namespace EmployeeManagement.Test.DepartmentTests
             mockDepartmentRepo.Setup(repo => repo.GetAllDepartmentsWithEmployees())
                 .Returns(new List<Department>());
 
-            var result = await departmentController.GetAllDepartmentsWithEmployees();
+            var result = await departmentController.GetAllDepartmentsWithEmployees().ConfigureAwait(false);
             Assert.IsType<NotFoundResult>(result.Result);
             Assert.Null(result.Value);
         }
@@ -71,9 +72,9 @@ namespace EmployeeManagement.Test.DepartmentTests
         public async Task Get_All_Departments_With_Employees_Returns_Correct_Values()
         {
             mockDepartmentRepo.Setup(repo => repo.GetAllDepartmentsWithEmployees())
-                .Returns(GetTestAllDepartments());
+                .Returns(TestDepartments);
 
-            var actionResult = await departmentController.GetAllDepartmentsWithEmployees();
+            var actionResult = await departmentController.GetAllDepartmentsWithEmployees().ConfigureAwait(false);
             var okObjectResult = actionResult.Result as OkObjectResult;
             Assert.NotNull(okObjectResult);
 
@@ -85,18 +86,49 @@ namespace EmployeeManagement.Test.DepartmentTests
             Assert.Equal(2, models?.Count);
         }
 
-        private List<Department> GetTestAllDepartments() =>
+        [Fact]
+        public async Task Get_Department_By_Id_Returns_Ok()
+        {
+            var testGuid = new Guid("c5eb3de9-4631-4814-b12c-e755cb7e8ef1");
+            mockDepartmentRepo.Setup(repo => repo.GetDepartmentByIdAsync(testGuid).Result)
+             .Returns(TestDepartments.FirstOrDefault(x => x.DepartmentId == testGuid));
+
+            var actionResult = await departmentController.GetDepartmentById(testGuid).ConfigureAwait(false);
+
+            Assert.IsType<OkObjectResult>(actionResult.Result);
+
+            var okObjectResult = actionResult.Result as OkObjectResult;
+
+            var department = okObjectResult?.Value as DepartmentDto;
+            Assert.NotNull(department);
+            Assert.Equal("Test", department?.DepartmentName);
+        }
+
+        [Fact]
+        public async Task Get_Department_By_Id_Returns_Not_Found()
+        {
+            var testGuid = new Guid("c5eb3de9-4631-4814-b12c-e755cb7e8ef1");
+            mockDepartmentRepo.Setup(repo => repo.GetDepartmentByIdAsync(testGuid).Result)
+             .Returns(TestDepartments.FirstOrDefault(x => x.DepartmentId == testGuid));
+
+            var actionResult = await departmentController.GetDepartmentById(new Guid("9022fd49-5669-469e-8464-95b10a00bb1d")).ConfigureAwait(false);
+
+            Assert.IsType<NotFoundResult>(actionResult.Result);
+
+            Assert.Null(actionResult?.Value);
+        }
+        private List<Department> TestDepartments =>
             new List<Department>
             {
                 new Department
                 {
-                    DepartmentId = Guid.NewGuid(),
+                    DepartmentId = new Guid("c5eb3de9-4631-4814-b12c-e755cb7e8ef1"),
                     DepartmentName = "Test",
                     Employees = new List<Employee>
                     {
                         new Employee
                         {
-                            EmployeeId = Guid.NewGuid(),
+                            EmployeeId = new Guid("9022fd49-5669-469e-8464-95b10a00bb1d"),
                             FirstName = "First",
                             LastName = "Last",
                         }
@@ -104,13 +136,13 @@ namespace EmployeeManagement.Test.DepartmentTests
                 },
                 new Department
                 {
-                    DepartmentId = Guid.NewGuid(),
+                    DepartmentId = new Guid("a7c51910-3491-4ea9-a750-f6c7ecde75fa"),
                     DepartmentName = "Test 1",
                     Employees = new List<Employee>
                     {
                         new Employee
                         {
-                            EmployeeId = Guid.NewGuid(),
+                            EmployeeId = new Guid("ab31de1c-d5c1-4ad6-be1f-55e8f303fd7d"),
                             FirstName = "First 1",
                             LastName = "Last 1",
                         }

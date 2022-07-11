@@ -8,10 +8,12 @@ import { EffectsModule } from '@ngrx/effects';
 import { DepartmentEffects } from './store/department.effects';
 import { SharedModule } from '../shared/shared.module';
 import { MaterialModule } from '../shared/material.module';
+import { AddDepartmentComponent } from './components/add-department/add-department.component';
 
 @NgModule({
   declarations: [
     DepartmentListComponent,
+    AddDepartmentComponent,
   ],
   imports: [
     CommonModule,

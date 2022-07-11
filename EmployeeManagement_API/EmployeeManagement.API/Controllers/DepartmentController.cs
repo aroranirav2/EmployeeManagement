@@ -47,7 +47,7 @@ namespace EmployeeManagement.API.Controllers
         [HttpGet("{id:guid}", Name = "departmentId")]
         public async Task<ActionResult<DepartmentDto>> GetDepartmentById(Guid id)
         {
-            var department = await _departmentRepository.GetDepartmentByIdAsync(id);
+            var department = await _departmentRepository.GetDepartmentByIdAsync(id).ConfigureAwait(false);
             if (department == null)
             {
                 await _loggerManager.LogWarnAsync($"No department found with department id = {id}");

@@ -6,6 +6,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { MaterialModule } from './material.module';
 import { SideNavBarComponent } from './components/side-nav-bar/side-nav-bar.component';
 import { LoaderComponent } from './components/loader/loader.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { LoaderComponent } from './components/loader/loader.component';
   ],
   imports: [
     AppRoutingModule,
+    ReactiveFormsModule,
     CommonModule,
     LayoutModule,
     MaterialModule
@@ -22,7 +24,8 @@ import { LoaderComponent } from './components/loader/loader.component';
   exports: [
     HeaderComponent,
     SideNavBarComponent,
-    LoaderComponent
+    LoaderComponent,
+    ReactiveFormsModule
   ]
 })
 export class SharedModule { }
