@@ -17,6 +17,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LoggerService", "LoggerServ
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Contracts", "Contracts\Contracts.csproj", "{8F637DE1-FCAD-4E98-9DD6-0FED25920A6F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmployeeManagement.PayRoll.API", "EmployeeManagement.PayRoll.API\EmployeeManagement.PayRoll.API.csproj", "{B3CBBE26-59DF-4E7F-BEFA-6066675F7DD8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{8F637DE1-FCAD-4E98-9DD6-0FED25920A6F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8F637DE1-FCAD-4E98-9DD6-0FED25920A6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8F637DE1-FCAD-4E98-9DD6-0FED25920A6F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B3CBBE26-59DF-4E7F-BEFA-6066675F7DD8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B3CBBE26-59DF-4E7F-BEFA-6066675F7DD8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B3CBBE26-59DF-4E7F-BEFA-6066675F7DD8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B3CBBE26-59DF-4E7F-BEFA-6066675F7DD8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
