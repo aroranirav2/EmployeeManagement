@@ -12,6 +12,17 @@ services:
       - 54078:80
     depends_on: 
         - sql-server-db
+  employeemanagement.payroll.api:
+    image: ${DOCKER_REGISTRY-}employeemanagementpayrollapi
+    restart: always
+    build:
+      context: .
+      dockerfile: EmployeeManagement.PayRoll.API/Dockerfile
+    ports:
+      - 54081:443
+      - 54080:80
+    depends_on: 
+        - sql-server-db
   sql-server-db:
     image: "mcr.microsoft.com/mssql/server:2019-latest"
     container_name: SqlServerLatest
