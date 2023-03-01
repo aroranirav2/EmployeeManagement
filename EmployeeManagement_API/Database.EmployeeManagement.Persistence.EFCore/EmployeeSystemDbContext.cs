@@ -8,6 +8,7 @@ namespace Database.EmployeeManagement.Persistence.EFCore
     {
         public virtual DbSet<Department> Department { get; set; }
         public virtual DbSet<Employee> Employee { get; set; }
+        public virtual DbSet<Account> Account { get; set; }
 
         public EmployeeSystemDbContext(DbContextOptions options) : base(options) { }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -16,6 +17,7 @@ namespace Database.EmployeeManagement.Persistence.EFCore
             modelBuilder.ApplyConfiguration(new EmployeeConfiguration());
             modelBuilder.ApplyConfiguration(new AddressConfiguration());
             modelBuilder.ApplyConfiguration(new PhoneConfiguration());
+            modelBuilder.ApplyConfiguration(new AccountConfiguration());
         }
     }
 }
