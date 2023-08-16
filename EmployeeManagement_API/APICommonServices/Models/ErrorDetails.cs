@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace EmployeeManagement.Repository.Models
+namespace APICommonServices.Models
 {
     public class ErrorDetails
     {
