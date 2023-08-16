@@ -12,7 +12,6 @@ namespace Database.EmployeeManagement.Persistence.EFCore.EntityConfiguration
         {
             builder.ToTable(TableName, Schema);
             builder.HasKey(e => e.EmployeeId);
-            builder.Property(e => e.EmployeeId).ValueGeneratedOnAdd();
             builder.HasOne(d => d.Department).WithMany(e => e.Employees);
             builder.Property(e => e.Gender).HasConversion(
                 e => e.ToString(),

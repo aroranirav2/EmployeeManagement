@@ -23,6 +23,17 @@ services:
       - 54080:80
     depends_on: 
         - sql-server-db
+  employeemanagement.account.api:
+    image: ${DOCKER_REGISTRY-}employeemanagementaccountapi
+    restart: always
+    build:
+      context: .
+      dockerfile: EmployeeManagement.Account.API/Dockerfile
+    ports:
+      - 54083:443
+      - 54082:80
+    depends_on: 
+      - sql-server-db
   sql-server-db:
     image: "mcr.microsoft.com/mssql/server:2019-latest"
     container_name: SqlServerLatest
