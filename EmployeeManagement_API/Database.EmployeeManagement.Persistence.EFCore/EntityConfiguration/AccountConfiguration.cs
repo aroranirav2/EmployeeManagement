@@ -4,15 +4,14 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Database.EmployeeManagement.Persistence.EFCore.EntityConfiguration
 {
-    public class DepartmentConfiguration: IEntityTypeConfiguration<Department>
+    public class AccountConfiguration : IEntityTypeConfiguration<Account>
     {
-        const string TableName = "Department";
+        const string TableName = "Account";
         const string Schema = "dbo";
-        public void Configure(EntityTypeBuilder<Department> builder)
+        public void Configure(EntityTypeBuilder<Account> builder)
         {
             builder.ToTable(TableName, Schema);
-            builder.HasKey(d => d.DepartmentId);
-            builder.Property(d => d.DepartmentName).HasMaxLength(20);
+            builder.HasKey(a => a.AccountId);
         }
     }
 }
