@@ -1,7 +1,8 @@
-﻿using Contracts;
-using EmployeeManagement.Repository.Models;
+﻿using APICommonServices.Models;
+using Contracts;
+using Microsoft.AspNetCore.Http;
 
-namespace EmployeeManagement.API.CustomExceptionMiddleware
+namespace APICommonServices.CustomExceptionMiddleware
 {
     public class ExceptionMiddleware
     {

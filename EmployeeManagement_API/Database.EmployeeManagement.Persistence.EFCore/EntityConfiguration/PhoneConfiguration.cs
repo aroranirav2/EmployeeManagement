@@ -12,7 +12,6 @@ namespace Database.EmployeeManagement.Persistence.EFCore.EntityConfiguration
         {
             builder.ToTable(TableName, Schema);
             builder.HasKey(p => p.PhoneId);
-            builder.Property(p => p.PhoneId).ValueGeneratedOnAdd();
             builder.HasOne(p => p.Employee).WithMany(e => e.Phones);
             builder.Property(p => p.PhoneNumber).HasMaxLength(11);
             builder.Property(p => p.PhoneType).HasMaxLength(10).HasConversion(
